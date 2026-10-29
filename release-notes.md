@@ -8,6 +8,8 @@
 - **一键关**：`revert`（CLI、Web、工具）在回滚补丁之外，新增 `closeSealedDesktopHost()`：退出后把 `resources/app` 挪成 `app.dshpurge-off-<时间戳>`、把 `app.asar.bak` 换回 `app.asar`，宿主回到官方原版密封包。不用再手工删目录。
 - 修复备份被锁时的静默失败：`atomicCopyFile` 遇到 Windows `EPERM|EACCES|EBUSY` 会删目标重试一次，仍失败则直接覆写目标，`.dshpurge.bak` 不再丢。
 - 新增 `scheduleCloseSealedRestart`（`lib/desktop.js`）：退出后执行的 PowerShell 脚本，负责挪目录 + 还原 asar + 重新打开 exe。
+- 修复自动换包在 Electron 里静默失败：`desktop.powershellPath()` 解析 `%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe` 绝对路径（App 进程 PATH 被收敛，裸 `powershell.exe` 可能 spawn 不出去）。
+- `closeSealedDesktopHost()` 加显式守卫：只有 `{ explicit: true }` / `intent: "revert"` 的调用才会动安装目录，裸调用返回 `not-requested`，不会误把已解包的安装还原成密封包。
 
 ## English
 
@@ -17,6 +19,8 @@
 - **One-click off**: `revert` now also calls `closeSealedDesktopHost()` — after exit, `resources/app` is moved to `app.dshpurge-off-<ts>` and `app.asar.bak` is restored to `app.asar`, returning the app to the stock sealed build.
 - Fixed silent backup loss: `atomicCopyFile` retries on Windows `EPERM|EACCES|EBUSY` by unlinking the destination, then falls back to a direct overwrite.
 - New `scheduleCloseSealedRestart` in `lib/desktop.js` drives the post-exit PowerShell restore.
+- Fixed silent failure of the archive swap inside Electron: `desktop.powershellPath()` resolves the absolute `%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe` (the app's PATH is sanitized, a bare `powershell.exe` spawn can fail).
+- `closeSealedDesktopHost()` now requires an explicit `{ explicit: true }` / `intent: "revert"`; a bare call returns `not-requested` and never touches the install directory.
 
 # 1.1.71
 
