@@ -1,3 +1,23 @@
+# 1.2.0
+
+## 中文
+
+- 版本 **1.2.0**。目标：**下载即用**，不再需要「解包脚本 + 手动点应用 + 手动删文件」。
+- **开箱即用**：`autoApplyOnStart` 默认改为 `true`。插件首次启动就自动解开官方密封 `app.asar` → 写入补丁 → 换包重启一次。
+- 新增 `autoUnsealOnStart`（默认 `true`）：桌面密封包在启动自愈时自动解包 + 换包，失败才退回「等用户点应用」。带 5 分钟冷却，避免解包失败时反复重启。
+- **一键关**：`revert`（CLI、Web、工具）在回滚补丁之外，新增 `closeSealedDesktopHost()`：退出后把 `resources/app` 挪成 `app.dshpurge-off-<时间戳>`、把 `app.asar.bak` 换回 `app.asar`，宿主回到官方原版密封包。不用再手工删目录。
+- 修复备份被锁时的静默失败：`atomicCopyFile` 遇到 Windows `EPERM|EACCES|EBUSY` 会删目标重试一次，仍失败则直接覆写目标，`.dshpurge.bak` 不再丢。
+- 新增 `scheduleCloseSealedRestart`（`lib/desktop.js`）：退出后执行的 PowerShell 脚本，负责挪目录 + 还原 asar + 重新打开 exe。
+
+## English
+
+- Version **1.2.0**. Goal: **install and it works** — no unpack script, no clicking Apply, no deleting files by hand.
+- `autoApplyOnStart` now defaults to `true`: on first boot the plugin unpacks the sealed official `app.asar`, writes the patches, swaps the archive aside and restarts once.
+- New `autoUnsealOnStart` (default `true`): sealed desktop installs self-heal by unpacking and swapping at boot, with a 5 minute cooldown; if it fails it falls back to waiting for Apply.
+- **One-click off**: `revert` now also calls `closeSealedDesktopHost()` — after exit, `resources/app` is moved to `app.dshpurge-off-<ts>` and `app.asar.bak` is restored to `app.asar`, returning the app to the stock sealed build.
+- Fixed silent backup loss: `atomicCopyFile` retries on Windows `EPERM|EACCES|EBUSY` by unlinking the destination, then falls back to a direct overwrite.
+- New `scheduleCloseSealedRestart` in `lib/desktop.js` drives the post-exit PowerShell restore.
+
 # 1.1.71
 
 ## 中文

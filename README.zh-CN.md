@@ -4,7 +4,7 @@
 
 <h1 align="center">⚔️ DeepSeek Harness 网络安全红队工具（dsh-purge）</h1>
 
-<p align="center"><strong>Version 1.1.71</strong></p>
+<p align="center"><strong>Version 1.2.0</strong></p>
 
 <p align="center">
   <em>DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「小码酱」。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐ 如要二开，请查看署名要求部分</em>
@@ -33,7 +33,11 @@
 
 > **官方 Web 和官方桌面端都支持。** 官方 `dsh web` 用 profile `web`；官方桌面 EXE（DeepSeek Harness **0.2.0-rc.2**）用 profile `desktop`。两边分开安装、分开点「应用」。当前版本只适配 dsh 0.2；更早的 dsh 用对应的老版本插件。社区桌面端不维护。
 >
-> 写进 profile 还不会改宿主。点会话标题旁的 **dsh-purge** → **清洗** → **应用**。成功会自动重启；补丁没打完不重启。重启后新开一轮对话，注入才进当前会话。
+> **装上就能用，不用点「应用」。** 1.2.0 起插件在首次启动时自动打补丁：官方密封桌面端会自动解开 `resources/app`、写入补丁、把 `app.asar` 挪到旁边并自动重启一次；Web 端就地改 profile 宿主。不需要删文件，也不需要点按钮。
+>
+> **关掉也是一键。** 随时可以「还原」：除了回滚补丁，还会把 `resources/app` 挪成 `app.dshpurge-off-*`、把官方 `app.asar` 换回来，下次重启就回到原版密封包。同样不用手改文件。
+>
+> 重启后新开一轮对话，注入才进当前会话。
 >
 > Node.js **≥18**。Windows 无闪窗需要 **Node ≥22**。插件市场一键安装和下面的命令都走 npm 包 `dsh-purge`。
 

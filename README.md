@@ -4,7 +4,7 @@
 
 <h1 align="center">⚔️ DeepSeek Harness cybersecurity red-team tool (dsh-purge)</h1>
 
-<p align="center"><strong>Version 1.1.71</strong></p>
+<p align="center"><strong>Version 1.2.0</strong></p>
 
 <p align="center">
   <em>DeepSeek Harness jailbreak: every model, swap prompts per model. Default prompt for 小码酱. Please star ⭐ If you build on this, see Attribution required.</em>
@@ -33,7 +33,11 @@
 
 > **Official Web and the official desktop app are both supported.** Official `dsh web` uses profile `web`. The official desktop EXE (DeepSeek Harness **0.2.0-rc.2**) uses profile `desktop`. Install and Apply them separately. This release targets dsh 0.2 only. Older dsh builds need the matching older plugin. Community Desktop is not maintained.
 >
-> Adding the plugin to a profile does not patch the host. Click **dsh-purge** beside the session title → **Clean** → **Apply**. A successful Apply restarts; an unfinished Apply does not. After the restart, start a new chat — that is when the inject enters the session.
+> **Install and it works — no Apply needed.** Since 1.2.0 the plugin patches the host on first boot: on the official sealed desktop app it unpacks `resources/app`, writes the patches, swaps the archive aside and restarts itself once; on web it patches the profile host in place. There is no file to delete and nothing to click.
+>
+> **Turning it off is one click too.** `Apply` / `Clean` can be reverted at any time, and **Revert** also restores the official `app.asar` (the unpacked `resources/app` is moved aside as `app.dshpurge-off-*`), so the app goes back to the stock sealed build on the next restart. Nothing to delete by hand.
+>
+> After a restart, start a new chat — that is when the inject enters the session.
 >
 > Node.js **≥18**. Windows no-flash needs **Node ≥22**. Hub one-click and the commands below both install the npm package `dsh-purge`.
 
