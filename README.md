@@ -1,10 +1,12 @@
+> **1.2.1 cwd compatibility fix:** restores the legacy working-directory prompt variable on DSH Desktop 0.2.1-rc.3. See [regression fix and validation](docs/CWD-COMPATIBILITY.md).
+
 <p align="center">
   <img src="docs/banner.svg" alt="dsh-purge" width="720">
 </p>
 
 <h1 align="center">⚔️ DeepSeek Harness cybersecurity red-team tool (dsh-purge)</h1>
 
-<p align="center"><strong>Version 1.2.0</strong></p>
+<p align="center"><strong>Version 1.2.1</strong></p>
 
 <p align="center">
   <em>DeepSeek Harness jailbreak: every model, swap prompts per model. Default prompt for 小码酱. Please star ⭐ If you build on this, see Attribution required.</em>

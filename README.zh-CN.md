@@ -1,10 +1,12 @@
+> **1.2.1 对话兼容修复：** 补回 1.2.0 遗漏的 cwd 变量修复，解决 DSH Desktop 0.2.1-rc.3 无法对话的问题。见[修复与验证说明](docs/CWD-COMPATIBILITY.md)。
+
 <p align="center">
   <img src="docs/banner.svg" alt="dsh-purge" width="720">
 </p>
 
 <h1 align="center">⚔️ DeepSeek Harness 网络安全红队工具（dsh-purge）</h1>
 
-<p align="center"><strong>Version 1.2.0</strong></p>
+<p align="center"><strong>Version 1.2.1</strong></p>
 
 <p align="center">
   <em>DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「小码酱」。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐ 如要二开，请查看署名要求部分</em>
